@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { Badge } from "./ui/badge";
-// import { RightSidebar } from '@/components/right-sidebar';
 
 const hotQuestions = [
   {
@@ -33,10 +32,10 @@ const popularTags = [
 
 export function RightSidebar() {
   return (
-    <div className="hidden flex-none w-80 lg:block">
-      <div className="sticky top-16 space-y-6">
+    <div className="hidden flex-none w-64  h-screen lg:block">
+      <div className="fixed top-14 space-y-6 h-full border-l px-10">
         <section>
-          <h2 className="text-lg font-semibold mb-4">Hot Network</h2>
+          <h2 className="text-lg font-semibold my-5">Hot Network</h2>
           <div className="space-y-4">
             {hotQuestions.map((question) => (
               <Link

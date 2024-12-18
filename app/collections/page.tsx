@@ -2,10 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Search } from "lucide-react";
+import { Search, Star } from "lucide-react";
 import Image from "next/image";
 
-const questions = [
+const savedQuestions = [
   {
     id: 1,
     title:
@@ -38,14 +38,45 @@ const questions = [
     },
     timeAgo: "2 mins ago",
   },
+  {
+    id: 3,
+    title:
+      "JavaScript validation for a form stops the form data from being submitted to mysql database",
+    tags: ["JAVASCRIPT", "REACT.JS", "INVALID FIELDS", "SALESFORCE"],
+    author: {
+      name: "Satheesh",
+      avatar: "/placeholder.svg",
+    },
+    stats: {
+      votes: "1.2k",
+      answers: "900",
+      views: "5.2k",
+    },
+    timeAgo: "2 mins ago",
+  },
+  {
+    id: 4,
+    title:
+      "The Lightning Component c:LWC_PizzaTracker generated invalid output for field status. Error How to solve this",
+    tags: ["JAVASCRIPT", "REACT.JS", "INVALID FIELDS", "SALESFORCE"],
+    author: {
+      name: "Satheesh",
+      avatar: "/placeholder.svg",
+    },
+    stats: {
+      votes: "1.2k",
+      answers: "900",
+      views: "5.2k",
+    },
+    timeAgo: "2 mins ago",
+  },
 ];
 
-export default function Home() {
+export default function Collections() {
   return (
-    <div className="dark-mode-bg py-6 px-4 sm:px-6 lg:px-8 lg:ml-80">
+    <div className="py-6 px-4 sm:px-6 lg:px-8 lg:ml-72">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold">All Questions</h1>
-        <Button>Ask a Question</Button>
+        <h1 className="text-2xl font-bold">Saved Questions</h1>
       </div>
 
       <div className="mb-6">
@@ -55,17 +86,8 @@ export default function Home() {
         </div>
       </div>
 
-      <Tabs defaultValue="newest" className="mb-6">
-        <TabsList>
-          <TabsTrigger value="newest">Newest</TabsTrigger>
-          <TabsTrigger value="recommended">Recommended Questions</TabsTrigger>
-          <TabsTrigger value="frequent">Frequent</TabsTrigger>
-          <TabsTrigger value="unanswered">Unanswered</TabsTrigger>
-        </TabsList>
-      </Tabs>
-
       <div className="space-y-4">
-        {questions.map((question) => (
+        {savedQuestions.map((question) => (
           <div
             key={question.id}
             className="rounded-lg border bg-card text-card-foreground shadow-sm p-6"
@@ -79,15 +101,24 @@ export default function Home() {
                 className="rounded-full"
               />
               <div className="flex-1 space-y-4">
-                <div>
-                  <h3 className="font-semibold hover:text-primary cursor-pointer">
-                    {question.title}
-                  </h3>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
-                    <span>{question.author.name}</span>
-                    <span>•</span>
-                    <span>{question.timeAgo}</span>
+                <div className="flex justify-between items-start gap-2">
+                  <div>
+                    <h3 className="font-semibold hover:text-primary cursor-pointer">
+                      {question.title}
+                    </h3>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
+                      <span>{question.author.name}</span>
+                      <span>•</span>
+                      <span>{question.timeAgo}</span>
+                    </div>
                   </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-yellow-500"
+                  >
+                    <Star className="h-4 w-4 fill-current" />
+                  </Button>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {question.tags.map((tag) => (
