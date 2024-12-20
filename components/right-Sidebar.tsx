@@ -33,7 +33,7 @@ const popularTags = [
 export function RightSidebar() {
   return (
     <div className="hidden flex-none w-64  h-screen lg:block">
-      <div className="fixed top-14 space-y-6 h-full border-l px-10">
+      <div className="fixed space-y-6 h-full shadow-lg shadow-[#131722] px-10">
         <section>
           <h2 className="text-lg font-semibold my-5">Hot Network</h2>
           <div className="space-y-4">

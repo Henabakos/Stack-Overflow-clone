@@ -1,10 +1,14 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { VoteControls } from "@/components/vote-controls";
 import { CodeBlock } from "@/components/code-block";
 import { AnswerCard } from "@/components/answer-card";
 import Image from "next/image";
+import { AnswerForm } from "@/components/answer-form";
 
-const question = {
+const questionData = {
   id: 1,
   title:
     "How to refresh all the data inside the Datatable and move the data into original place after closing the modal popup close button",
@@ -37,10 +41,9 @@ I need it so that when the user clicks the button, any changes made stay in plac
     views: "5.2k",
   },
   tags: ["JAVASCRIPT", "REACT.JS", "INVALID FIELDS", "DEPLOYMENT"],
-  createdAt: new Date("2024-01-18T12:00:00"),
 };
 
-const answers = [
+const answersData = [
   {
     id: 1,
     content:
@@ -59,7 +62,7 @@ const answers = [
       avatar: "/placeholder.svg",
     },
     votes: 15,
-    createdAt: new Date("2024-01-18T14:30:00"),
+    createdAt: "2024-01-18T14:30:00",
   },
   {
     id: 2,
@@ -77,42 +80,50 @@ if (partsLibBigSearch.rows({search:'applied'}).count()) {
       avatar: "/placeholder.svg",
     },
     votes: 8,
-    createdAt: new Date("2024-01-18T15:45:00"),
+    createdAt: "2024-01-18T15:45:00",
   },
 ];
 
 export default function QuestionPage() {
+  const [currentDate, setCurrentDate] = useState("");
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    setCurrentDate(new Date().toLocaleString());
+  }, []);
+
   return (
-    <div className="py-6 px-4 sm:px-6 w-[100px]">
+    <div className="py-6 px-4 sm:px-6 lg:px-8">
       <div className="space-y-6">
         <div className="flex gap-6">
-          <VoteControls initialVotes={question.stats.votes} />
+          <VoteControls initialVotes={questionData.stats.votes} />
           <div className="flex-1 space-y-4">
-            <h1 className="text-2xl font-bold">{question.title}</h1>
+            <h1 className="text-2xl font-bold">{questionData.title}</h1>
             <div className="flex items-center gap-6 text-sm text-muted-foreground">
-              <span>{question.stats.views} views</span>
+              <span>{questionData.stats.views} views</span>
               <div className="flex items-center gap-2">
                 <Image
-                  src={question.author.avatar}
-                  alt={question.author.name}
+                  src={questionData.author.avatar}
+                  alt={questionData.author.name}
                   width={24}
                   height={24}
                   className="rounded-full"
                 />
-                <span>asked by {question.author.name}</span>
+                <span>asked by {questionData.author.name}</span>
               </div>
             </div>
             <div className="prose dark:prose-invert max-w-none">
-              <p>{question.content}</p>
-              {question.code && (
+              <p>{questionData.content}</p>
+              {questionData.code && (
                 <CodeBlock
-                  code={question.code.content}
-                  language={question.code.language}
+                  code={questionData.code.content}
+                  language={questionData.code.language}
                 />
               )}
             </div>
             <div className="flex flex-wrap gap-2">
-              {question.tags.map((tag) => (
+              {questionData.tags.map((tag) => (
                 <Badge key={tag} variant="secondary">
                   {tag}
                 </Badge>
@@ -124,7 +135,7 @@ export default function QuestionPage() {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold">
-              {question.stats.answers} Answers
+              {questionData.stats.answers} Answers
             </h2>
             <select className="bg-background text-sm border rounded-md px-2 py-1">
               <option>Highest Upvotes</option>
@@ -133,10 +144,22 @@ export default function QuestionPage() {
             </select>
           </div>
           <div className="divide-y">
-            {answers.map((answer) => (
-              <AnswerCard key={answer.id} answer={answer} />
+            {answersData.map((answer) => (
+              <AnswerCard
+                key={answer.id}
+                answer={{
+                  ...answer,
+                  createdAt: new Date(answer.createdAt),
+                }}
+              />
             ))}
           </div>
+        </div>
+        <div className="mt-8">
+          <AnswerForm
+            onSubmit={(content) => console.log("Submit answer:", content)}
+            onGenerateAI={() => console.log("Generate AI answer")}
+          />
         </div>
       </div>
     </div>

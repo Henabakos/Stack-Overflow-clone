@@ -8,6 +8,7 @@ import {
   HelpCircle,
   BookMarked,
   LogOut,
+  BookAIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
@@ -23,6 +24,12 @@ const navigation = [
     name: "Recommended Qs",
     href: "/recommended",
     icon: BookMarked,
+    current: false,
+  },
+  {
+    name: "Blogs",
+    href: "/blogs",
+    icon: BookAIcon,
     current: false,
   },
 ];

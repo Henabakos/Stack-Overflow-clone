@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { LeftSidebar } from "@/components/left-sidebar";
-import { RightSidebar } from "@/components/right-Sidebar";
-import { Header } from "@/components/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,16 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.className} bg-background`}>
-        <div className=" flex min-h-screen justify-between w-full">
-          <LeftSidebar />
-          <main className="flex-1 pb-10 ml-64">
-            <Header />
-            <div className="container flex gap-10">
-              <div className="flex-1 ">{children}</div>
-              <RightSidebar />
-            </div>
-          </main>
-        </div>
+        <div>{children}</div>
       </body>
     </html>
   );
