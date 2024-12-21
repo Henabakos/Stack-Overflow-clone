@@ -45,7 +45,7 @@ export function JobCard({ job }: JobCardProps) {
             </div>
             <div className="flex items-center gap-2">
               <Image
-                src="/flags/au.svg"
+                src="/flag.svg"
                 alt="Australia"
                 width={16}
                 height={16}

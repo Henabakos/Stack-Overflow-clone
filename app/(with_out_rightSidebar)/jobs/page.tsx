@@ -39,7 +39,7 @@ const mockJobs = [
     },
     type: "Full-time",
     salary: "40k - 90k",
-    location: "Melbourne, AU",
+    location: "Adelaide, AU",
     category: "SOFTWARE",
   },
   {
@@ -67,7 +67,7 @@ const mockJobs = [
     },
     type: "Full-time",
     salary: "40k - 90k",
-    location: "Melbourne, AU",
+    location: "Sydney, AU",
     category: "SOFTWARE",
   },
 ];

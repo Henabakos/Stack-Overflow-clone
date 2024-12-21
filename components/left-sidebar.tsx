@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Home,
   Star,
@@ -12,6 +15,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
+import Image from "next/image";
 
 const navigation = [
   { name: "Home", href: "/", icon: Home, current: true },
@@ -35,13 +39,23 @@ const navigation = [
 ];
 
 export function LeftSidebar() {
+  const pathname = usePathname();
+
   return (
     <div className="hidden  lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col ">
       <div className="flex flex-col grow gap-y-2 overflow-y-auto px-6 pb-7 shadow-lg shadow-[#131722]">
-        <div className="flex items-center mt-6 justify-center">
-          <span className="hidden font-bold sm:inline-block">DevOverflow</span>
+        <div className="flex items-center mt-6 justify-center gap-2">
+          <Image
+            src="/logo.svg"
+            alt="DevOverflow Logo"
+            width={40}
+            height={40}
+          />
+          <span className="hidden font-bold sm:inline-block text-xl">
+            Dev<span className="text-[#6D28D9]">Over</span>flow
+          </span>
         </div>
-        <nav className="flex flex-1 flex-col pt-4">
+        <nav className="flex flex-1 flex-col pt-2">
           <ul role="list" className="flex flex-1 flex-col gap-y-10">
             <li>
               <ul role="list" className="-mx-2 space-y-1">
@@ -51,7 +65,7 @@ export function LeftSidebar() {
                       href={item.href}
                       className={cn(
                         buttonVariants({
-                          variant: item.current ? "default" : "ghost",
+                          variant: pathname === item.href ? "default" : "ghost",
                         }),
                         "w-full justify-start gap-2"
                       )}
