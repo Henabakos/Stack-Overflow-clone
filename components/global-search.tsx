@@ -2,16 +2,6 @@
 
 import { useState } from "react";
 import { Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import {
-  Command,
-  CommandDialog,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { DialogTitle } from "@radix-ui/react-dialog";
@@ -42,13 +32,9 @@ const mockResults: SearchResult[] = [
     type: "Answer",
     category: "Deployment",
   },
-  {
-    id: "4",
-    title: "JavaScript",
-    type: "Tag",
-    category: "Tag",
-  },
+  { id: "4", title: "JavaScript", type: "Tag", category: "Tag" },
 ];
+
 export function GlobalSearch() {
   const [open, setOpen] = useState(false);
   const [selectedType, setSelectedType] = useState<string>("Question");
@@ -75,53 +61,51 @@ export function GlobalSearch() {
           <span className="text-xs">⌘</span>K
         </kbd>
       </Button>
-      <CommandDialog open={open} onOpenChange={setOpen}>
-        <>
+      {open && (
+        <div className="absolute top-0 left-0 w-full bg-white p-4 shadow-lg">
           <DialogTitle className="hidden">Global Search</DialogTitle>
-        </>
-        <div className="flex items-center border-b px-3">
-          <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
-          <CommandInput
-            placeholder="Search anything globally..."
-            value={query}
-            onValueChange={setQuery}
-          />
+          <div className="flex items-center border-b px-3">
+            <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+            <input
+              type="text"
+              placeholder="Search anything globally..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="w-full border-none bg-transparent text-sm focus:outline-none"
+            />
+          </div>
+          <div className="flex items-center gap-2 border-b px-3 py-2">
+            <span className="text-sm text-muted-foreground">Type:</span>
+            {["Question", "Answer", "Users", "Tags"].map((type) => (
+              <Badge
+                key={type}
+                variant={selectedType === type ? "default" : "outline"}
+                className="cursor-pointer"
+                onClick={() => setSelectedType(type)}
+              >
+                {type}
+              </Badge>
+            ))}
+          </div>
+          <div>
+            {filteredResults.length > 0 ? (
+              filteredResults.map((result) => (
+                <div key={result.id} className="p-2">
+                  <span>{result.title}</span>
+                  <span className="text-sm text-muted-foreground">
+                    {" "}
+                    - {result.category}
+                  </span>
+                </div>
+              ))
+            ) : (
+              <p className="p-4 text-center text-sm text-muted-foreground">
+                No results found.
+              </p>
+            )}
+          </div>
         </div>
-        <div className="flex items-center gap-2 border-b px-3 py-2">
-          <span className="text-sm text-muted-foreground">Type:</span>
-          {["Question", "Answer", "Users", "Tags"].map((type) => (
-            <Badge
-              key={type}
-              variant={selectedType === type ? "default" : "outline"}
-              className="cursor-pointer"
-              onClick={() => setSelectedType(type)}
-            >
-              {type}
-            </Badge>
-          ))}
-        </div>
-        <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          {filteredResults.length > 0 && (
-            <CommandGroup heading="Top Match">
-              {filteredResults.map((result) => (
-                <CommandItem
-                  key={result.id}
-                  value={result.title}
-                  className="flex items-center gap-2"
-                >
-                  <div className="flex flex-col">
-                    <span>{result.title}</span>
-                    <span className="text-sm text-muted-foreground">
-                      {result.category}
-                    </span>
-                  </div>
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          )}
-        </CommandList>
-      </CommandDialog>
+      )}
     </>
   );
 }

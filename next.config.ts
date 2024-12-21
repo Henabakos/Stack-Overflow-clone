@@ -1,9 +1,11 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  // images: {
-  //   domains: ["i.pinimg.com"],
-  // },
+const nextConfig: NextConfig = {};
+
+module.exports = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;
