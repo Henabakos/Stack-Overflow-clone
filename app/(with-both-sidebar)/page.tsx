@@ -58,12 +58,20 @@ export default function Home() {
         </div>
       </div>
 
-      <Tabs defaultValue="newest" className="mb-6">
-        <TabsList>
-          <TabsTrigger value="newest">Newest</TabsTrigger>
-          <TabsTrigger value="recommended">Recommended Questions</TabsTrigger>
-          <TabsTrigger value="frequent">Frequent</TabsTrigger>
-          <TabsTrigger value="unanswered">Unanswered</TabsTrigger>
+      <Tabs defaultValue="newest" className="flex overflow-x-scroll mb-6">
+        <TabsList className="flex  justify-center sm:justify-start">
+          <TabsTrigger value="newest" className="w-full sm:w-auto">
+            Newest
+          </TabsTrigger>
+          <TabsTrigger value="recommended" className="w-full sm:w-auto">
+            Recommended Questions
+          </TabsTrigger>
+          <TabsTrigger value="frequent" className="w-full sm:w-auto">
+            Frequent
+          </TabsTrigger>
+          <TabsTrigger value="unanswered" className="w-full sm:w-auto">
+            Unanswered
+          </TabsTrigger>
         </TabsList>
       </Tabs>
 

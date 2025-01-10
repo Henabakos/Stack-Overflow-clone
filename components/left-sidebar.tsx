@@ -42,7 +42,7 @@ export function LeftSidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="hidden  lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col ">
+    <div className="max-lg:bg-[#131722]/75 lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col ">
       <div className="flex flex-col grow gap-y-2 overflow-y-auto px-6 pb-7 shadow-lg shadow-[#131722]">
         <div className="flex items-center mt-6 justify-center gap-2">
           <Image
